@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2. 간이 연락처 관리 페이지</title>
+
+    <style>
+        .getForm {
+            display: flex;
+        }
+        .getName, .getPhoneNumber, .getMail, .getMemo {
+            display: flex;
+            margin-bottom: 5px;
+        }
+        .form-label {
+            width: 80px;
+        }
+        .contact-box {
+            flex-direction: column;
+            display: flex;
+            flex-wrap: wrap;
+            width: 250px;
+            height: 300px;
+            margin-top: 15px;
+        } 
+        .contact-box a {
+            color: black;
+            text-decoration: none;
+            border: 1px solid black;
+            width: 100px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 5px;
+        }
+        #pagination {
+            display: none;
+        }
+        #pagination a {
+            margin-right: 10px;
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+
+    <script>
+        function loadNum() {
+            var length = localStorage.length;
+            names = [];
+
+            for (var i = 0; i < length; ++i) {
+                names[i] = localStorage.key(i);
+            }
+
+            names.sort();
+
+            var markup = "<div class='contact-box'>";
+            
+            for (var name in names) {
+                markup += "<a href='#'>"+ names[name] +"</a>";
+                if (length >= 11) break; 
+            }
+            
+            markup += "</div>";
+                
+            document.getElementById("show").innerHTML = markup;
+
+
+            /**display pagination**/
+            var pages = document.getElementById("pagination");
+            if (length >= 11) {
+                pages.style.display = 'flex';
+            }
+            else pages.style.display = 'none';
+        }
+
+        function addPhoneNum() {
+            var name = document.getElementById("name");
+            var phone_number = document.getElementById("phone_number");
+            var email = document.getElementById("email");
+            var memo = document.getElementById("memo");
+
+            if (name.value == "") {
+                alert("이름을 입력해주세요");
+                return;
+            }
+            if (phone_number.value == "") {
+                alert("전화번호를 입력해주세요");
+                return;
+            }
+            if (name.value != "" && phone_number.value != "") {
+                if (localStorage.getItem(name.value) != null) {
+                    alert("이미 등록된 이름입니다")
+                    return;
+                }
+                array = [phone_number.value, email.value, memo.value];
+                localStorage.setItem(name.value, JSON.stringify(array));
+                name.value = "";
+                phone_number.value = "";
+                email.value = "";
+                memo.value = "";
+                loadNum();
+            }
+        }
+
+        function deletePhoneNum() {
+            var name = document.getElementById("name").value;
+            localStorage.removeItem(name);
+            loadNum();
+        }
+
+        function deleteAll() {
+            localStorage.clear();
+            loadNum();
+        }
+
+        function start() {
+            var addButton = document.getElementById("addButton");
+            addButton.addEventListener("click", addPhoneNum, false);
+
+            var deleteButton = document.getElementById("deleteButton");
+            deleteButton.addEventListener("click", deletePhoneNum, false);
+
+            var delAllButton = document.getElementById("delAllButton");
+            delAllButton.addEventListener("click", deleteAll, false);
+            loadNum();
+        }
+
+        window.addEventListener("load", start, false);
+    </script>
+</head>
+<body>
+    <div class="getForm">
+        <form>
+            <div class="getName">
+                <label class="form-label">이름:</label>
+                <input type="text" id="name">
+            </div>
+
+            <div class="getPhoneNumber">
+                <label class="form-label">전화번호:</label> 
+                <input type="text" id="phone_number">
+            </div>
+
+            <div class="getMail">
+                <label class="form-label">이메일:</label> 
+                <input type="text" id="email">
+            </div>
+
+            <div class="getMemo">
+                <label class="form-label">메모:</label>
+                <input type="text" id="memo">
+            </div>
+
+            <input type="button" id="addButton" value="연락처 추가">
+            <input type="button" id="deleteButton" value="연락처 삭제">
+            <input type="reset" id="delAllButton" value="모두 삭제">
+        </form>
+    </div>
+
+    <div id="show"></div>
+    <div id="showInfo"></div>
+
+    <div id="pagination">
+        <a href="#">page1</a>
+        <a href="#">page2</a>
+        <a href="#">page3</a>
+        <a href="#">page4</a>
+        <a href="#">page5</a>
+    </div>
+
+</body>
+</html>

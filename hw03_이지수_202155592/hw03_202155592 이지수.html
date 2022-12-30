@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Drop-down 메뉴바</title>
+    <style>
+      .container {
+         display: flex;
+         /*flex-wrap: wrap;*/
+         width: 102px;
+         /*width: 250px;*/
+      }
+      .container a {
+         color: purple;
+         font-size: 1.5em;
+         text-decoration: none;
+         border: 1px solid black;
+         width: 100px;
+         height: 50px;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+      }
+      #hidden {
+         display: none;
+      }
+      #clicked {
+         background-color: grey;
+      }  
+      .container:hover {
+         flex-wrap: wrap;
+         width: 250px;
+      }
+      .container:hover > #hidden {
+         display: flex;
+      }
+      /*
+      #clicked:hover ~ #hidden {
+         display: flex;
+      }
+      */
+    </style>
+</head>
+<body>
+   <div class="container">
+      <a href="https://www.google.co.kr/" id="clicked">1</a>
+      <a href="https://www.google.co.kr/" id="hidden">2</a>
+      <a href="https://www.google.co.kr/" id="hidden">3</a>
+      <a href="https://www.google.co.kr/" id="hidden">4</a>
+      <a href="https://www.google.co.kr/" id="hidden">5</a>
+      <a href="https://www.google.co.kr/" id="hidden">6</a>
+      <a href="https://www.google.co.kr/" id="hidden">7</a>
+      <a href="https://www.google.co.kr/" id="hidden">8</a>
+      <a href="https://www.google.co.kr/" id="hidden">9</a>
+      <a href="https://www.google.co.kr/" id="hidden">10</a>
+   </div>
+</body>
+</html>

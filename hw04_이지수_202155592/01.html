@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>1.책 표지 만들기</title>
+    <style>
+        h2, #title_display, #explanation_display, #writer_display, #logo{
+            width : 300px;
+            display: flex;
+            justify-content: center;
+        }
+        #publisher_display {
+            text-align: right;
+            width: 320px;
+        }
+        #logo {
+            width : 300px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+        }
+        input {
+            width : 300px;
+            height: 20px;
+            margin-bottom: 10px;
+        }
+        #publisher {
+            width : 308px;
+            height: 25px;
+            margin-bottom: 10px;
+        }
+        #print, #reset {
+            width : 150px;
+            height: 30px;
+        }
+        img {
+            display: none;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+
+    <script>
+        function display() {
+            const title = document.getElementById('title').value;
+            const img = document.getElementById("logo")
+            const explanation = document.getElementById('explanation').value;
+            const writer = document.getElementById('writer').value;
+            const publisher = document.getElementById('publisher').value;
+            
+            document.getElementById("title_display").innerHTML = title;
+            img.src = "img/logo.png";
+            document.getElementById("explanation_display").innerHTML = explanation;
+            document.getElementById("writer_display").innerHTML = writer + " 지음";
+            document.getElementById("publisher_display").innerHTML = "(주)" + publisher;
+        }
+
+        function check() {
+            const title = document.getElementById('title').value;
+            const img = document.getElementById("logo")
+            const explanation = document.getElementById('explanation').value;
+            const writer = document.getElementById('writer').value;
+            const publisher = document.getElementById('publisher').value;
+            if (title == "") {
+                alert("제목을 입력해주세요");
+                return;
+            }
+            if (explanation == "") {
+                alert("설명을 입력해주세요");
+                return;
+            }
+            if (writer == "") {
+                alert("저자를 입력해주세요");
+                return;
+            }
+
+            if (title != "" && explanation != "" && writer != "") display();
+        }
+
+        function resetCard() {
+            document.getElementById("id_card").innerHTML = "";
+        }
+    </script>
+</head>
+<body>
+    <h2>책 표지 만들기</h2>
+
+    <form id="book">
+        <input type="text" id="title" placeholder="제목 입력"><br>
+        <input type="text" id="explanation" placeholder="설명 입력"><br>
+        <select id="publisher">
+            <option value="부산출판사">부산출판사</option>
+            <option value="금정출판사">금정출판사</option>
+            <option value="장전출판사">장전출판사</option>
+        </select>
+        <br>
+        <input type="text" id="writer" placeholder="저자 입력"><br>
+
+        <input type="button" onclick="check()" id="print" value="책 표지 출력"> 
+        <input type="reset" onclick="resetCard()" id ="reset" value="초기화">
+    </form>
+    <br>
+    <div id="id_card">
+        <div id="title_display" style="font-weight:bold"></div>
+        <img id="logo" src="img/blank.png">
+        <div id="explanation_display"></div>
+        <br>
+        <div id="writer_display"></div>
+        <br>
+        <br>
+        <div id="publisher_display"></div>
+    </div>
+</body>
+</html>

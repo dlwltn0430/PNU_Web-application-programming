@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>1.책 표지 만들기</title>
+    <style>
+        h2, #title_display, #explanation_display, #write_display, #logo{
+            width : 300px;
+            display: flex;
+            justify-content: center;
+        }
+        #logo {
+            width : 300px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+        }
+        input {
+            width : 300px;
+            height: 20px;
+            margin-bottom: 10px;
+        }
+        #publisher {
+            width : 308px;
+            height: 25px;
+            margin-bottom: 10px;
+        }
+        #print, #reset {
+            width : 150px;
+            height: 30px;
+        }
+        img {
+            display: none;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+
+    <script>
+        function display() {
+            document.getElementById("title_display").innerHTML = "제목1";
+            var img1 = document.getElementById("logo")
+            img1.src = "img/logo.png";
+            document.getElementById("explanation_display").innerHTML = "책에 대한 간략한 설명 문구";
+            document.getElementById("write_display").innerHTML = "홍길동 지음";
+        }
+        function check() {
+            if (document.getElementById("title").value=="") {
+                alert("제목을 입력해주세요");
+                return;
+            }
+            if (document.getElementById("explanation").value=="") {
+                alert("설명을 입력해주세요");
+                return;
+            }
+            if (document.getElementById("writer").value=="") {
+                alert("저자를 입력해주세요");
+                return;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>책 표지 만들기</h2>
+
+<form id="book">
+    <input type="text" id="title" placeholder="제목 입력"><br>
+    <input type="text" id="explanation" placeholder="설명 입력"><br>
+    <select id="publisher">
+        <option value="부산">부산출판사</option>
+        <option value="금정">금정출판사</option>
+        <option value="장전">장전출판사</option>
+    </select>
+    <br>
+    <input type="text" id="writer" placeholder="저자 입력"><br>
+
+    <input type="button" onclick="display(); check()" id="print" value="책 표지 출력"> 
+    <input type="reset" id ="reset" value="초기화">
+    <br>
+    <p id="title_display"></p>
+    <img id="logo" src="img/blank.png"></p>
+    <p id="explanation_display"></p>
+    <p id="write_display"></p>
+</form> 
+</body>
+</html>
